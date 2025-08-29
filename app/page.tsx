@@ -7,14 +7,19 @@ type Props = {
 };
 
 async function getBlogPosts(): Promise<Props[]> {
-  const data = await client.get({
-    endpoint: "blog",
-    queries: {
-      fields: "id,title",
-      limit: 5,
-    },
-  });
-  return data.contents;
+  try {
+    const data = await client.get({
+      endpoint: "blog",
+      queries: {
+        fields: "id,title",
+        limit: 5,
+      },
+    });
+    return data.contents;
+  } catch (err) {
+    console.error("microCMSからの取得に失敗:", err);
+    return []; // 失敗時でもページは崩さず空配列で返す
+  }
 }
 
 export default async function Home() {
