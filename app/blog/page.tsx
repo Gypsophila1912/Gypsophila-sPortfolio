@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { client } from "../libs/microcms";
+import { client } from "../../libs/microcms";
 
 type Props = {
   id: string;
@@ -21,11 +21,12 @@ async function getBlogPosts(): Promise<Props[]> {
     return []; // 失敗時でもページは崩さず空配列で返す
   }
 }
+
 export default async function Home() {
   const posts = await getBlogPosts();
   return (
-    <>
-      <h1>ギプソのポートフォリオサイトへようこそ！</h1>
+    <main>
+      <h1>ブログ一覧</h1>
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
@@ -37,6 +38,6 @@ export default async function Home() {
           </li>
         ))}
       </ul>
-    </>
+    </main>
   );
 }

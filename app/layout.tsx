@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Link from "next/link";
+import { FaTwitter, FaGithub } from "react-icons/fa";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,10 +26,42 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
-    </html>
+    <>
+      <html lang="en">
+        <head>
+          <title>Gypsophila's Portfolio</title>
+          <link rel="shortcut icon" href="/icon.png" />
+        </head>
+        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+          <header>
+            <nav>
+              <Link href={`/`}>Home</Link>
+              <Link href={`/blog`}>記事一覧へ</Link>
+              <Link href={`/ryakureki`}>略歴へ</Link>
+            </nav>
+          </header>
+          <main>{children}</main>
+          <footer>
+            <div>
+              ギプソのサイトでしたー © 2025 Gypsophila. All rights reserved.
+              <a
+                href="https://x.com/Gypsophila_1912"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaTwitter size={28} />
+              </a>
+              <a
+                href="https://github.com/Gypsophila1912"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub size={28} />
+              </a>
+            </div>
+          </footer>
+        </body>
+      </html>
+    </>
   );
 }
